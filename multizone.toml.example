@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: © 2023 Kevin Meagher
+#
+# SPDX-License-Identifier: CC0-1.0
+
+format = "yyyy-MM-dd HH:mm:ss Z"
+locale = "en_US"
+zones = [
+    "Pacific/Auckland",
+    "Asia/Tokyo",
+    "Europe/Berlin",
+    "America/New_York",
+    "America/Denver",
+    ]
+
+[aliases]
+"Pacific/Auckland" = "New Zealand"
+"Asia/Tokyo" = "Japan"
+"Europe/Berlin" = "Deutschland"
+"America/New_York" = "US Eastern"
+"America/Denver" = "US Mountain"
+
+[reftime]
+color = "cyan"
+attrs = ["bold"]
+
+[localtime]
+color = "red"
+attrs = ["bold"]

@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: © 2023 Kevin Meagher
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Tests
+on: [push, pull_request]
+jobs:
+  Tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        os: [ubuntu-20.04, ubuntu-22.04, macos-11, macos-12]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: pip
+        cache-dependency-path: pyproject.toml
+    - name: Install multizone
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install flit
+        python3 -m flit install --symlink --deps=production --extras=test
+    - name: Run Tests
+      run: python3 -m pytest  --cov-report=xml
+    - name: Upload Coverage to Codecov
+      if: ${{ !github.event.act }}
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: false
+        verbose: true

@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2023 Kevin Meagher
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.2,<4"]
+
+[project]
+authors = [{name = "Kevin Meagher"}]
+classifiers = [
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Utilities"
+]
+dependencies = ["backports.zoneinfo; python_version < '3.9'", "babel", "tabulate", "tzlocal", "xdg", "termcolor", "tomli; python_version < '3.11'"]
+dynamic = ["version", "description"]
+license = {file = "COPYING"}
+name = "multizone"
+
+[project.optional-dependencies]
+dev = ["pre-commit"]
+mypy = ["types-tabulate", "types-tzlocal", "types-termcolor"]
+test = ["pytest", "pytest-cov"]
+
+[project.scripts]
+multizone = "multizone:main"
+
+[tool.black]
+line-length = 108
+target-version = ['py37']
+
+[tool.coverage.run]
+include = ["multizone.py"]
+
+[tool.pylint.format]
+max-line-length = "108"
+
+[tool.pylint.message_control]
+disable = "R0912"
+
+[tool.ruff]
+fixable = ["D", "I", "COM"]
+ignore = ["INP001", "D211", "D212", "S101", "PLR2004", "C901"]  # , "ERA001", "ARG005"]
+line-length = 108
+select = ["ALL"]
+target-version = "py37"
