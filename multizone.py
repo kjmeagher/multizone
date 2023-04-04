@@ -215,13 +215,14 @@ def table_to_string(
     zones2 = []
     for name, time in zones:
         timestr = format_datetime(time, config["format"], locale=config["locale"])
+        new_name = name
         if time.utcoffset() == refdt.astimezone(localzone).utcoffset():
-            name = colored(name, **config["localtime"])
+            new_name = colored(new_name, **config["localtime"])
             timestr = colored(timestr, **config["localtime"])
         if time.utcoffset() == refdt.utcoffset():
-            name = colored(name, **config["reftime"])
+            new_name = colored(new_name, **config["reftime"])
             timestr = colored(timestr, **config["reftime"])
-        zones2.append((name, timestr))
+        zones2.append((new_name, timestr))
 
     return tabulate.tabulate(zones2, tablefmt="plain")
 
