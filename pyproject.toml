@@ -49,7 +49,7 @@ disable = "R0912"
 
 [tool.ruff]
 fixable = ["D", "I", "COM"]
-ignore = ["INP001", "D211", "D212", "S101", "PLR2004", "C901"]  # , "ERA001", "ARG005"]
+ignore = ["INP001", "D211", "D212", "S101", "PLR2004", "C901", "PLR0912"]
 line-length = 108
 select = ["ALL"]
 target-version = "py37"
