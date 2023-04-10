@@ -42,7 +42,11 @@ def get_arg(time_str: str, sep: str) -> List[int]:
     raise ValueError
 
 
-def parse_time_arg(time_arg: List[str], default_time: datetime, default_zone: tzinfo) -> datetime:
+def parse_time_arg(  # noqa: C901,PLR0912
+    time_arg: List[str],
+    default_time: datetime,
+    default_zone: tzinfo,
+) -> datetime:
     """Parse the date time an time zone arguments."""
     refdate = None
     reftime = None
@@ -79,13 +83,13 @@ def parse_time_arg(time_arg: List[str], default_time: datetime, default_zone: tz
         refzone = default_zone
     ref_dt = default_time.astimezone(refzone)
     if refdate:
-        if len(refdate) == 2:
+        if len(refdate) == 2:  # noqa: PLR2004
             refdate.insert(0, ref_dt.year)
     else:
         refdate = [ref_dt.year, ref_dt.month, ref_dt.day]
 
     if reftime:
-        if len(reftime) == 2:
+        if len(reftime) == 2:  # noqa: PLR2004
             reftime.append(0)
     else:
         reftime = [ref_dt.hour, ref_dt.minute, ref_dt.second]
