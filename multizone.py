@@ -6,14 +6,15 @@
 
 """Command line tool for calculating times in multiple different timezones."""
 
-__version__ = "0.1.0"
+from __future__ import annotations
 
+__version__ = "0.1.0"
 
 import argparse
 import sys
 from datetime import datetime, timedelta, tzinfo
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict
 
 import tabulate
 import tzlocal
@@ -34,7 +35,7 @@ else:
 ConfigType = Dict[str, Any]
 
 
-def get_arg(time_str: str, sep: str) -> List[int]:
+def get_arg(time_str: str, sep: str) -> list[int]:
     """Parse date or time with 1 or two delimiters."""
     split = time_str.split(sep)
     if len(split) in (2, 3):
@@ -43,14 +44,14 @@ def get_arg(time_str: str, sep: str) -> List[int]:
 
 
 def parse_time_arg(  # noqa: C901,PLR0912
-    time_arg: List[str],
+    time_arg: list[str],
     default_time: datetime,
     default_zone: tzinfo,
 ) -> datetime:
     """Parse the date time an time zone arguments."""
     refdate = None
     reftime = None
-    refzone: Optional[tzinfo] = None
+    refzone: tzinfo | None = None
 
     for arg in time_arg:
         if refdate is None:
@@ -119,7 +120,7 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
-def load_config(config_path: Optional[Path]) -> ConfigType:
+def load_config(config_path: Path | None) -> ConfigType:
     """Read toml configuration file from given path or default path."""
     if config_path is None:
         config_filename = xdg.xdg_config_home() / "multizone" / "multizone.toml"
@@ -166,7 +167,7 @@ def configure(args: argparse.Namespace, config_file: ConfigType) -> ConfigType:
     return config
 
 
-def time_offset(item: Tuple[str, datetime]) -> timedelta:
+def time_offset(item: tuple[str, datetime]) -> timedelta:
     """Key function to sort times."""
     offset = item[1].utcoffset()
     assert offset is not None
@@ -174,13 +175,13 @@ def time_offset(item: Tuple[str, datetime]) -> timedelta:
 
 
 def zone_table(
-    timezones: List[str],
-    aliases: Dict[str, str],
+    timezones: list[str],
+    aliases: dict[str, str],
     refdt: datetime,
     localzone: tzinfo,
-) -> List[Tuple[str, datetime]]:
+) -> list[tuple[str, datetime]]:
     """Create a table of times for each time zone."""
-    zones: List[Tuple[str, datetime]] = []
+    zones: list[tuple[str, datetime]] = []
     found_local = False
     found_ref = False
     localdt = refdt.astimezone(localzone)
@@ -210,7 +211,7 @@ def zone_table(
 
 
 def table_to_string(
-    zones: List[Tuple[str, datetime]],
+    zones: list[tuple[str, datetime]],
     refdt: datetime,
     localzone: tzinfo,
     config: ConfigType,
