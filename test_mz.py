@@ -197,4 +197,4 @@ def test_table_to_string() -> None:
 
 
 if __name__ == "__main__":
-    pytest.main(["test_mz.py"])
+    pytest.main(["-v", __file__])
