@@ -21,12 +21,12 @@ classifiers = [
   "Topic :: Utilities"
 ]
 dependencies = [
-  "backports.zoneinfo; python_version < '3.9'", 
-  "babel", 
-  "tabulate", 
-  "tzlocal", 
-  "xdg-base-dirs", 
-  "termcolor", 
+  "backports.zoneinfo; python_version < '3.9'",
+  "babel",
+  "tabulate",
+  "tzlocal",
+  "xdg-base-dirs",
+  "termcolor",
   "tomli; python_version < '3.11'"
 ]
 dynamic = ["version", "description"]

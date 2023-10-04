@@ -18,10 +18,10 @@ from typing import Any, Dict
 
 import tabulate
 import tzlocal
-from xdg_base_dirs import xdg_config_home
 from babel.core import default_locale
 from babel.dates import format_datetime
 from termcolor import colored
+from xdg_base_dirs import xdg_config_home
 
 if sys.version_info < (3, 9):
     from backports import zoneinfo
