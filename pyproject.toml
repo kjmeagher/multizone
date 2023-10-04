@@ -21,13 +21,14 @@ classifiers = [
   "Topic :: Utilities"
 ]
 dependencies = [
-  "backports.zoneinfo; python_version < '3.9'",
   "babel",
+  "backports.zoneinfo; python_version < '3.9'",
   "tabulate",
-  "tzlocal",
-  "xdg-base-dirs",
   "termcolor",
-  "tomli; python_version < '3.11'"
+  "tomli; python_version < '3.11'",
+  "tzlocal",
+  "xdg; python_version < '3.10'",
+  "xdg-base-dirs; python_version >= '3.10'"
 ]
 dynamic = ["version", "description"]
 license = {file = "COPYING"}
