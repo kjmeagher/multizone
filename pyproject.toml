@@ -20,7 +20,15 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Topic :: Utilities"
 ]
-dependencies = ["backports.zoneinfo; python_version < '3.9'", "babel", "tabulate", "tzlocal", "xdg", "termcolor", "tomli; python_version < '3.11'"]
+dependencies = [
+  "backports.zoneinfo; python_version < '3.9'", 
+  "babel", 
+  "tabulate", 
+  "tzlocal", 
+  "xdg-base-dirs", 
+  "termcolor", 
+  "tomli; python_version < '3.11'"
+]
 dynamic = ["version", "description"]
 license = {file = "COPYING"}
 name = "multizone"

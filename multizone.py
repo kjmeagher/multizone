@@ -18,7 +18,7 @@ from typing import Any, Dict
 
 import tabulate
 import tzlocal
-import xdg
+from xdg_base_dirs import xdg_config_home
 from babel.core import default_locale
 from babel.dates import format_datetime
 from termcolor import colored
@@ -123,7 +123,7 @@ def parse_args() -> argparse.Namespace:
 def load_config(config_path: Path | None) -> ConfigType:
     """Read toml configuration file from given path or default path."""
     if config_path is None:
-        config_filename = xdg.xdg_config_home() / "multizone" / "multizone.toml"
+        config_filename = xdg_config_home() / "multizone" / "multizone.toml"
         if not config_filename.is_file():
             config_filename = None
     else:
