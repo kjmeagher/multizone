@@ -72,7 +72,7 @@ def test_parse_args() -> None:
     with patch("sys.argv", ["multizone", "--list"]), contextlib.redirect_stdout(None):
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             multizone.parse_args()
-        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.type is SystemExit
 
     iargs = [
         "multizone",
