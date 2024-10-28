@@ -12,9 +12,10 @@ __version__ = "0.1.0"
 
 import argparse
 import sys
+import zoneinfo
 from datetime import datetime, timedelta, tzinfo
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 import tabulate
 import tzlocal
@@ -22,10 +23,6 @@ from babel.core import default_locale
 from babel.dates import format_datetime
 from termcolor import colored
 
-if sys.version_info < (3, 9):
-    from backports import zoneinfo
-else:
-    import zoneinfo
 if sys.version_info < (3, 10):
     from xdg import xdg_config_home
 else:
@@ -35,7 +32,7 @@ if sys.version_info < (3, 11):
 else:
     import tomllib
 
-ConfigType = Dict[str, Any]
+ConfigType = dict[str, Any]
 
 
 def get_arg(time_str: str, sep: str) -> list[int]:
@@ -202,12 +199,13 @@ def zone_table(
         zones.append((name, time))
 
     if not found_local:
-        zones.append((str(localzone), localdt))
+        localname = str(localzone)
+        zones.append((aliases.get(localname, localname), localdt))
 
     if not found_ref and localoffset != refoffset:
         tzname = refdt.tzname()
         assert tzname is not None
-        zones.append((tzname, refdt))
+        zones.append((aliases.get(tzname, tzname), refdt))
 
     zones.sort(key=time_offset)
     return zones

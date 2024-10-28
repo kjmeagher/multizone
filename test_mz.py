@@ -12,16 +12,12 @@ from argparse import Namespace
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, mock_open, patch
+from zoneinfo import ZoneInfo
 
 import pytest
 from babel.core import default_locale
 
 import multizone
-
-if sys.version_info < (3, 9):
-    from backports.zoneinfo import ZoneInfo
-else:
-    from zoneinfo import ZoneInfo
 
 
 def test_parse_time_args() -> None:
@@ -180,6 +176,9 @@ def test_zone_table() -> None:
     tab4 = multizone.zone_table(["ROK", "EST", "UTC"], {"ROK": "Korea", "EST": "Eastern"}, time0, rok)
     assert tab4 == [("Korea", time_rok), ("UTC", time0), ("Eastern", time_est)]
 
+    tab5 = multizone.zone_table(["EST"], {"ROK": "Korea", "UTC": "London"}, time0, rok)
+    assert tab5 == [("Korea", time_rok), ("London", time0), ("EST", time_est)]
+
 
 def test_table_to_string() -> None:
     """Test table_to_string()."""
@@ -197,4 +196,4 @@ def test_table_to_string() -> None:
 
 
 if __name__ == "__main__":
-    pytest.main(["-v", __file__])
+    sys.exit(pytest.main(["-v", __file__, *sys.argv[1:]]))
