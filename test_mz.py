@@ -12,16 +12,12 @@ from argparse import Namespace
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, mock_open, patch
+from zoneinfo import ZoneInfo
 
 import pytest
 from babel.core import default_locale
 
 import multizone
-
-if sys.version_info < (3, 9):
-    from backports.zoneinfo import ZoneInfo
-else:
-    from zoneinfo import ZoneInfo
 
 
 def test_parse_time_args() -> None:
