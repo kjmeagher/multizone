@@ -202,12 +202,13 @@ def zone_table(
         zones.append((name, time))
 
     if not found_local:
-        zones.append((str(localzone), localdt))
+        localname = str(localzone)
+        zones.append((aliases.get(localname, localname), localdt))
 
     if not found_ref and localoffset != refoffset:
         tzname = refdt.tzname()
         assert tzname is not None
-        zones.append((tzname, refdt))
+        zones.append((aliases.get(tzname, tzname), refdt))
 
     zones.sort(key=time_offset)
     return zones

@@ -53,7 +53,7 @@ include = ["multizone.py"]
 max-line-length = "108"
 
 [tool.pylint.message_control]
-disable = "R0912"
+disable = "R0912,R0914"
 
 [tool.ruff]
 fixable = ["D", "I", "COM"]
