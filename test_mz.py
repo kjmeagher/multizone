@@ -131,8 +131,8 @@ def test_configure() -> None:
         "zones": ["ROK", "ROC"],
         "aliases": {"ROK": "Korea"},
         "time": None,
-        "reftime": {"color": "red", "on_color": None, "attrs": []},
-        "localtime": {"color": "green", "on_color": None, "attrs": []},
+        "reftime": {"color": "red", "on_color": None, "attrs": []},  # type: ignore[dict-item]
+        "localtime": {"color": "green", "on_color": None, "attrs": []},  # type: ignore[dict-item]
         "locale": "fr_FR",
     }
     assert multizone.configure(args2, cfg) == {
