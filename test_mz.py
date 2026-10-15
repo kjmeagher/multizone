@@ -100,7 +100,7 @@ def test_load_config() -> None:
         open=mock_open(read_data=b""),
         is_file=MagicMock(return_value=False),
     ):
-        assert multizone.load_config(None) == {}
+        assert not multizone.load_config(None)
 
     with patch.multiple(
         "pathlib.Path",
