@@ -12,6 +12,7 @@ __version__ = "0.1.0"
 
 import argparse
 import sys
+import tomllib
 import zoneinfo
 from datetime import datetime, timedelta, tzinfo
 from pathlib import Path
@@ -22,15 +23,7 @@ import tzlocal
 from babel.core import default_locale
 from babel.dates import format_datetime
 from termcolor import colored
-
-if sys.version_info < (3, 10):
-    from xdg import xdg_config_home
-else:
-    from xdg_base_dirs import xdg_config_home
-if sys.version_info < (3, 11):
-    import tomli as tomllib
-else:
-    import tomllib
+from xdg_base_dirs import xdg_config_home
 
 ConfigType = dict[str, Any]
 
